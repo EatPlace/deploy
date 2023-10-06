@@ -1,0 +1,87 @@
+version: '3.8'
+
+services:
+  rest_api:
+    container_name: rest_api
+    image: rest_api
+
+    env_file:
+      - .env
+    build:
+      context: ../rest_api
+      dockerfile: Dockerfile
+
+    volumes:
+      - ../rest_api:/src
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+
+  web_ui:
+    container_name: web_ui
+    image: web_ui
+    environment:
+      REACT_APP_DEV: dev
+    build:
+      context: ../web_ui
+      dockerfile: Dockerfile  # Путь к Dockerfile для React-приложения
+
+    volumes:
+      - ../web_ui:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"  # Определите порт, на который будет проксироваться React-приложение
+    depends_on:
+      - rest_api  # Зависимость от rest_api
+
+  db:
+    container_name: db
+    hostname: db
+    image: library/postgres:14.1
+
+    environment:
+      - POSTGRES_USER=rest
+      - POSTGRES_PASSWORD=rest
+      - POSTGRES_DB=rest
+    volumes:
+      - eat_place_pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:6.2-alpine
+    hostname: redis
+    container_name: redis
+    command:
+      - 'redis-server'
+      - '--requirepass myStrongPassword'
+    ports:
+      - 6379:6379
+
+  test_db:
+    container_name: test_db
+    hostname: test_db
+    image: library/postgres:14.1
+
+    environment:
+      - POSTGRES_USER=rest
+      - POSTGRES_PASSWORD=rest
+      - POSTGRES_DB=rest
+    volumes:
+      - eat_place_test_pg_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+volumes:
+  eat_place_pg_data:
+    driver: "local"
+
+  eat_place_test_pg_data:
+    driver: "local"
+
+networks:
+  default:
+    external: true
+    name: eat_place
