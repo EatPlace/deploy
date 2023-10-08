@@ -31,9 +31,8 @@ services:
     ports:
       - "9000:9000"
     restart: always      
-    environment:
-      - ENVIRONMENT="PRODUCTION"
-      - JWT_SECRET: JWT_SECRET
+    env_file:
+      - .prod.env
     depends_on:
       - db
       - redis
