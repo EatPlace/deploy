@@ -30,7 +30,6 @@ services:
     image: timofeytst/eat-place:rest_api_prod
     ports:
       - "9000:9000"
-      - "8000:8000"
     restart: always
     
     env_file:
