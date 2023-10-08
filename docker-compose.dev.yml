@@ -15,12 +15,26 @@ services:
     ports:
       - "5432:5432"
 
+  test_db:
+    container_name: test_db
+    hostname: test_db
+    image: library/postgres:14.1
+
+    environment:
+      - POSTGRES_USER=rest
+      - POSTGRES_PASSWORD=rest
+      - POSTGRES_DB=rest
+    volumes:
+      - eat_place_test_pg_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
   redis:
     image: redis:6.2-alpine
     hostname: redis
     container_name: redis
     env_file:
-      - .prod.env
+      - .env
     command:
       - /bin/sh
       - -c
@@ -30,29 +44,32 @@ services:
 
 
   rest_api:
-    image: timofeytst/eat-place:rest_api_prod
+    image: timofeytst/eat-place:rest_api_dev
     ports:
-      - "9000:9000"
+      - "8000:8000"
     restart: always
     
     env_file:
-      - .prod.env
+      - .env
     depends_on:
       - db
       - redis
 
   web_ui:
-    image: timofeytst/eat-place:web_ui_prod
+    image: timofeytst/eat-place:web_ui_dev
     ports:
-      - "3000:80"
+      - "3000:3000"
     restart: always      
     environment:
-      REACT_APP_DEV: prod
+      REACT_APP_DEV: dev
     depends_on:
       - rest_api
 
 volumes:
   eat_place_pg_data:
+    driver: "local"
+
+  eat_place_test_pg_data:
     driver: "local"
 
 networks:
