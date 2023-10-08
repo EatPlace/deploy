@@ -30,7 +30,9 @@ services:
     image: timofeytst/eat-place:rest_api_prod
     ports:
       - "9000:9000"
-    restart: always      
+    restart: always
+    environment:
+      ENVIRONMENT: PRODUCTION  
     env_file:
       - .prod.env
     depends_on:
