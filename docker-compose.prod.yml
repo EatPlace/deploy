@@ -31,8 +31,8 @@ services:
     ports:
       - "9000:9000"
     restart: always      
-    env_file:
-      - .prod.env
+    environment:
+      - ENVIRONMENT: PRODUCTION
     depends_on:
       - db
       - redis
