@@ -9,16 +9,13 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
-      - name: Echo info
-        run: |
-          echo "Started deploying..."
       - name: checkout repo
         uses: actions/checkout@v4
 
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v2.0
         with:
-          envkey_JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          # envkey_JWT_SECRET: ${{ secrets.JWT_SECRET }}
           envkey_GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
           envkey_GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
           
