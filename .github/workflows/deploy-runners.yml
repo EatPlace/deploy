@@ -19,11 +19,31 @@ jobs:
         uses: SpicyPizza/create-envfile@v2.0
         with:
           envkey_JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          envkey_GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+          envkey_GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+          
+          envkey_AUTH_TOKEN_EXP: ${{ secrets.AUTH_TOKEN_EXP }}
+          envkey_RESET_PASSWORD_TOKEN_EXP: ${{ secrets.RESET_PASSWORD_TOKEN_EXP }}
+          envkey_VERIFY_TOKEN_EXP: ${{ secrets.VERIFY_TOKEN_EXP }}
+
           envkey_POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           envkey_POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           envkey_POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
           envkey_POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
           envkey_POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+
+          envkey_REDIS_HOST: ${{ secrets.REDIS_HOST }}
+          envkey_REDIS_PORT: ${{ secrets.REDIS_PORT }}
+          envkey_REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
+
+          envkey_SITE_DOMAIN: ${{ secrets.SITE_DOMAIN }}
+          envkey_SECURE_COOKIES: ${{ secrets.SECURE_COOKIES }}
+
+          envkey_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+
+          envkey_CORS_HEADERS: ${{ secrets.CORS_HEADERS }}
+          envkey_CORS_ORIGINS: ${{ secrets.CORS_ORIGINS }}
+
           file_name: .prod.env
           directory: "./"
           fail_on_empty: false
