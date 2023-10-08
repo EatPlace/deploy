@@ -44,7 +44,7 @@ jobs:
           envkey_CORS_HEADERS: ${{ secrets.CORS_HEADERS }}
           envkey_CORS_ORIGINS: ${{ secrets.CORS_ORIGINS }}
 
-          envkey_ENVIRONMENT: PRODUCTION
+          envkey_ENVIRONMENT: ${{ secrets.ENVIRONMENT }}
 
           file_name: .prod.env
           directory: "./"
