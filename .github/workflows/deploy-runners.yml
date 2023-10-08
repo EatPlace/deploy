@@ -29,7 +29,7 @@ jobs:
       #     sort_keys: false
 
       - name: pull images
-        run: docker-compose -f docker-compose.prod.yaml pull
+        run: docker-compose -f docker-compose.prod.yml pull
 
       - name: restart containers
-        run: docker-compose -f docker-compose.prod.yaml up -d
+        run: docker-compose -f docker-compose.prod.yml up -d
