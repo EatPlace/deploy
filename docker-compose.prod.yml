@@ -1,15 +1,6 @@
 version: '3.8'
 
 services:
-
-  web-ui:
-    image: timofeytst/eat-place:web_ui_prod
-    ports:
-      - "3000:80"
-    restart: always      
-    environment:
-      REACT_APP_DEV: prod
-
   db:
     container_name: db
     hostname: db
@@ -33,6 +24,28 @@ services:
       - '--requirepass myStrongPassword'
     ports:
       - 6379:6379
+
+
+  rest_api:
+    image: timofeytst/eat-place:rest_api_prod
+    ports:
+      - "9000:9000"
+    restart: always      
+    env_file:
+      - .prod.env
+    depends_on:
+      - db
+      - redis
+
+  web_ui:
+    image: timofeytst/eat-place:web_ui_prod
+    ports:
+      - "3000:80"
+    restart: always      
+    environment:
+      REACT_APP_DEV: prod
+    depends_on:
+      - rest_api
 
 volumes:
   eat_place_pg_data:
