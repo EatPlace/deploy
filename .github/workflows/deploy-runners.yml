@@ -27,7 +27,7 @@ jobs:
           envkey_POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           envkey_POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
           envkey_POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
-          envkey_POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          # envkey_POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
 
           envkey_REDIS_HOST: ${{ secrets.REDIS_HOST }}
           envkey_REDIS_PORT: ${{ secrets.REDIS_PORT }}
