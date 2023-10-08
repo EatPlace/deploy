@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   web-ui:
-    image: timofeytst/eat_place:web_ui_prod
+    image: timofeytst/eat-place:web_ui_prod
     ports:
       - "3000:80"
     restart: always      
